@@ -1,6 +1,7 @@
 from userge import userge, Message, config
 import PyMDL
 from pyrogram import enums
+import urllib.request
 import os
 
 THUMB_PATH = config.Dynamic.DOWN_PATH + "imdb_thumb.jpg"
