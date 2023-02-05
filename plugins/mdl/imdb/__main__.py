@@ -44,7 +44,7 @@ async def search_(name):
             id = imdb.search_movie(name)[0].movieID
             data = imdb.get_movie(id).data
         url = "https://www.imdb.com/title/tt" + data.get("imdbID")
-        image_link = data..get("cover url").split("V1")[0] + "V1_720.jpg"
+        image_link = data.get("cover url").split("V1")[0] + "V1_720.jpg"
         mov_name = data.get("title")
         genres = ", ".join(bb.get("genres"))
         mov_rating = data.get("rating")
