@@ -46,7 +46,7 @@ async def search_(name):
         stars = ", ".join(data.casts)
         year = data.date
         info = data.synopsis
-        story_line = (info[:95] + '...') if len(info) > 75 else indo
+        story_line = (info[:95] + '...') if len(info) > 75 else info
         description = f"""
 <b>Title</b><a href='{image_link}'>🎬</a>: <code>{mov_name}</code>
 <b>>Genres: </b><code>{genres}</code>
