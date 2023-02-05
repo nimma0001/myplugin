@@ -3,8 +3,10 @@ import PyMDL
 from pyrogram import enums
 import urllib.request
 import os
+from pathlib import Path
+from pySmartDL import SmartDL
 
-THUMB_PATH = config.Dynamic.DOWN_PATH + "imdb_thumb.jpg"
+THUMB_PATH = str(Path().cwd())
 
 
 @userge.on_cmd("mdl", about="get movie from mdl")
@@ -13,26 +15,24 @@ async def first_command(message: Message) -> None:
     name = message.input_str
     await message.edit(f"Seachring for : {name}")
     data, image = await search_(name)
-    if os.path.exists(THUMB_PATH):
-        os.remove(THUMB_PATH)
-        fb = open(THUMB_PATH,'wb')
-        try:
-            fb.write(urllib.request.urlopen(image).read())
-            fb.close()
-            await message.client.send_photo(
-                chat_id=message.chat.id,
-                photo=THUMB_PATH,
-                caption=data,
-                parse_mode=enums.ParseMode.HTML
-            )
-            await message.delete()
-        except:
-            await message.edit(
-            description,
-            disable_web_page_preview=True,
+    #os.remove(THUMB_PATH)
+    try:
+        id = SmartDL(image, THUMB_PATH, progress_bar=False)
+        id.start()
+        await message.client.send_photo(
+            chat_id=message.chat.id,
+            photo=id.get_dest(),
+            caption=data,
             parse_mode=enums.ParseMode.HTML
         )
-            fb.close()
+        await message.delete()
+        os.remove(id.get_dest())
+    except:
+        await message.edit(
+        description,
+        disable_web_page_preview=True,
+        parse_mode=enums.ParseMode.HTML
+    )
 async def search_(name):
     try:
         data = PyMDL.search(name).get(0)
