@@ -31,7 +31,6 @@ async def search_(name):
 <b>Title</b><a href='{image_link}'>🎬</a>: <code>{mov_name}</code>
 <b>>Genres: </b><code>{genres}</code>
 <b>Rating⭐: </b><code>{mov_rating}</code>
-<b>Country🗺: </b><code>{mov_country}</code>
 <b>Language: Hindi</b>
 <b>Duration⏳: </b><code>{duration}</code>
 <b>Director📽: </b><code>{director}</code>
