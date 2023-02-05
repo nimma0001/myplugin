@@ -58,8 +58,7 @@ async def search_(name):
 <b>Release Year📅: </b><code>{year}</code>
 <b>Resolution : 480,720,1080</b>
 <b>IMDB :</b> {url}
-<b>Story Line : </b><em>{story_line}</em>
-<b>Available On : 👇👇👇👇 </b>"""
+<b>Story Line : </b><em>{story_line}</em>"""
     
         return description, image_link
     except:
