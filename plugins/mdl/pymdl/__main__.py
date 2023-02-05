@@ -16,15 +16,23 @@ async def first_command(message: Message) -> None:
     if os.path.exists(THUMB_PATH):
         os.remove(THUMB_PATH)
         fb = open(THUMB_PATH,'wb')
-        fb.write(urllib.request.urlopen(image).read())
-        fb.close()
-        await message.client.send_photo(
-            chat_id=message.chat.id,
-            photo=THUMB_PATH,
-            caption=data,
+        try:
+            fb.write(urllib.request.urlopen(image).read())
+            fb.close()
+            await message.client.send_photo(
+                chat_id=message.chat.id,
+                photo=THUMB_PATH,
+                caption=data,
+                parse_mode=enums.ParseMode.HTML
+            )
+            await message.delete()
+        except:
+            await message.edit(
+            description,
+            disable_web_page_preview=True,
             parse_mode=enums.ParseMode.HTML
         )
-        await message.delete()
+            fb.close()
 async def search_(name):
     try:
         data = PyMDL.search(name).get(0)
