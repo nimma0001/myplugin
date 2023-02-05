@@ -27,7 +27,7 @@ async def search_(name):
         year = data.date
         info = data.synopsis
         story_line = (info[:95] + '...') if len(info) > 75 else indo
-     description = f"""
+        description = f"""
 <b>Title</b><a href='{image_link}'>🎬</a>: <code>{mov_name}</code>
 <b>>Genres: </b><code>{genres}</code>
 <b>Rating⭐: </b><code>{mov_rating}</code>
@@ -42,6 +42,6 @@ async def search_(name):
 <b>Story Line : </b><em>{story_line}</em>
 <b>Available On : 👇👇👇👇 </b>"""
     
-    return description
+        return description
     except:
         return "Not Found"
