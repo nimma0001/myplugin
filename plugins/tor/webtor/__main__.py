@@ -3,8 +3,8 @@ import sys
 import selenium
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import chromedriver_autoinstaller
-from selenium.webdriver.chrome.options import Options
+import geckodriver_autoinstaller
+from selenium.webdriver.firefox.options import Options
 import pyperclip
 
 from userge import userge, Message, config
@@ -14,12 +14,12 @@ from userge.utils import is_url
 
 chrome_options = Options()
 chrome_options.add_argument("--headless")
-chromedriver_autoinstaller.install() 
+geckodriver_autoinstaller.install() 
 
 
 @userge.on_cmd("tor", about="download movie")
 async def imdb_(message: Message) -> None:
-  driver = webdriver.Chrome(options=chrome_options)
+  driver = webdriver.Firefox(options=chrome_options)
   driver.get(message.input_str)
   load_button = driver.find_element(By.CLASS_NAME, 'btn.my-btn-link.zip').click()
   await asyncio.sleep(3)
