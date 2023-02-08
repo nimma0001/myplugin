@@ -4,6 +4,7 @@ import selenium
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import chromedriver_autoinstaller
+from selenium.webdriver.chrome.options import Options
 import pyperclip
 
 from userge import userge, Message, config
@@ -11,9 +12,10 @@ from pyrogram import enums
 from ..download import url_download
 from userge.utils import is_url
 
-
+chrome_options = Options()
+chrome_options.add_argument("--headless")
 chromedriver_autoinstaller.install() 
-driver = webdriver.Chrome()
+driver = webdriver.Chrome(options=chrome_options)
 
 @userge.on_cmd("tor", about="download movie")
 async def imdb_(message: Message) -> None:
