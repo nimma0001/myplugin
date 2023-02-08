@@ -15,11 +15,11 @@ from userge.utils import is_url
 chrome_options = Options()
 chrome_options.add_argument("--headless")
 chromedriver_autoinstaller.install() 
-driver = webdriver.Chrome(options=chrome_options)
+
 
 @userge.on_cmd("tor", about="download movie")
 async def imdb_(message: Message) -> None:
-  driver= webdriver.Chrome()
+  driver = webdriver.Chrome(options=chrome_options)
   driver.get(message.input_str)
   load_button = driver.find_element(By.CLASS_NAME, 'btn.my-btn-link.zip').click()
   await asyncio.sleep(3)
