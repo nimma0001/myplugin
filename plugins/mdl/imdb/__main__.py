@@ -14,19 +14,26 @@ async def imdb_(message: Message) -> None:
     await message.edit(f"Seachring for : {name}")
     data, image = await search_(name)
     #os.remove(THUMB_PATH)
-    try:
-        id = SmartDL(image, THUMB_PATH, progress_bar=False)
-        id.start()
-        await message.client.send_photo(
+    if not image:
+        await message.edit(
+        data,
+        disable_web_page_preview=True,
+        parse_mode=enums.ParseMode.HTML
+    )
+    else:
+        try:
+            id = SmartDL(image, THUMB_PATH, progress_bar=False)
+            id.start()
+            await message.client.send_photo(
             chat_id=message.chat.id,
             photo=id.get_dest(),
             caption=data,
             parse_mode=enums.ParseMode.HTML
         )
-        await message.delete()
-        os.remove(id.get_dest())
-    except:
-        await message.edit(
+            await message.delete()
+            os.remove(id.get_dest())
+        except:
+            await message.edit(
         description,
         disable_web_page_preview=True,
         parse_mode=enums.ParseMode.HTML
@@ -71,4 +78,4 @@ async def search_(name):
         return description, image_link
     
     except:
-        return "Not Found"
+        return "Not Found", False
