@@ -15,7 +15,7 @@ from userge.utils import is_url
 chromedriver_autoinstaller.install() 
 driver = webdriver.Chrome()
 
-@@userge.on_cmd("tor", about="download movie")
+@userge.on_cmd("tor", about="download movie")
 async def imdb_(message: Message) -> None:
   driver= webdriver.Chrome()
   driver.get(message.input_str)
@@ -27,10 +27,10 @@ async def imdb_(message: Message) -> None:
     try:
       path_, _ = await url_download(message, url)
     except ProcessCanceled:
-            await message.canceled()
-            return
+      await message.canceled()
+      return
     except Exception as e_e:  # pylint: disable=broad-except
-        await message.err(str(e_e))
-        return
+      await message.err(str(e_e))
+      return
     await message.replay(str(path_))
 
