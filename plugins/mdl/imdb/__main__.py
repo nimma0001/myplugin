@@ -25,19 +25,19 @@ async def imdb_(message: Message) -> None:
             id = SmartDL(image, THUMB_PATH, progress_bar=False)
             id.start()
             await message.client.send_photo(
-            chat_id=message.chat.id,
-            photo=id.get_dest(),
-            caption=data,
-            parse_mode=enums.ParseMode.HTML
-        )
+                chat_id=message.chat.id,
+                photo=id.get_dest(),
+                caption=data,
+                parse_mode=enums.ParseMode.HTML
+            )
             await message.delete()
             os.remove(id.get_dest())
         except:
             await message.edit(
-        description,
-        disable_web_page_preview=True,
-        parse_mode=enums.ParseMode.HTML
-    )
+            description,
+            disable_web_page_preview=True,
+            parse_mode=enums.ParseMode.HTML
+        )
   
   
   
@@ -53,11 +53,11 @@ async def search_(name):
         url = "https://www.imdb.com/title/tt" + data.get("imdbID")
         image_link = data.get("cover url").split("V1")[0] + "V1_720.jpg"
         mov_name = data.get("title")
-        genres = ", ".join(bb.get("genres"))
+        genres = ", ".join(data.get("genres"))
         mov_rating = data.get("rating")
         duration = data.get("runtimes")
         director = data.get("director")[0].data.get("name")
-        cast = ([x.get("name") for x in bb.get("cast")][:4]) if len([x.get("name") for x in bb.get("cast")]) > 5 else [x.get("name") for x in bb.get("cast")]
+        cast = ([x.get("name") for x in data.get("cast")][:4]) if len([x.get("name") for x in data.get("cast")]) > 5 else [x.get("name") for x in data.get("cast")]
         stars = ", ".join(cast)
         year = data.get("original air date")
         info = data.get("plot outline")
