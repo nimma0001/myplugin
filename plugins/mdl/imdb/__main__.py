@@ -34,7 +34,7 @@ async def imdb_(message: Message) -> None:
             os.remove(id.get_dest())
         except:
             await message.edit(
-            description,
+            data,
             disable_web_page_preview=True,
             parse_mode=enums.ParseMode.HTML
         )
