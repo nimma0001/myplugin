@@ -45,7 +45,7 @@ async def imdb_(message: Message) -> None:
 async def search_(name):
     imdb = Cinemagoer()
     try:
-        if "tt" in name:
+        if name[:2] == "tt":
             data = imdb.get_movie(name[2:]).data
         else:
             id = imdb.search_movie(name)[0].movieID
