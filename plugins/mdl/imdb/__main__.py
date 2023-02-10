@@ -77,5 +77,5 @@ async def search_(name):
     
         return description, image_link
     
-    except:
-        return "Not Found", False
+    except BaseException as e:
+        return e, False
