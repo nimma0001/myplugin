@@ -56,12 +56,14 @@ async def search_(name):
         genres = ", ".join(data.get("genres"))
         mov_rating = data.get("rating")
         duration = data.get("runtimes")
-        director = data.get("director")[0].data.get("name")
-        cast = ([x.get("name") for x in data.get("cast")][:4]) if len([x.get("name") for x in data.get("cast")]) > 5 else [x.get("name") for x in data.get("cast")]
+        print(data.get("director"))
+        l_d = [d.get("name") for d in data.get("director")] if data.get("director") != None else ["not found"]
+        director = ", ".join(l_d)
+        cast = ([x.get("name") for x in data.get("cast")][:4]) if data.get("cast") != None else ["not found"]
         stars = ", ".join(cast)
         year = data.get("original air date")
         info = data.get("plot outline")
-        story_line = (info[:95] + '...') if len(info) > 75 else info
+        story_line = (info[:95] + '...') if info != None else "not found"
         description = f"""
 <b>Title</b><a href='{image_link}'>🎬</a>: <code>{mov_name}</code>
 <b>>Genres: </b><code>{genres}</code>
@@ -76,6 +78,5 @@ async def search_(name):
 <b>Story Line : </b><em>{story_line}</em>"""
     
         return description, image_link
-    
     except BaseException as e:
         return e, False
