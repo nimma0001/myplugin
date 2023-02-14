@@ -73,11 +73,14 @@ async def t2p(message: Message) -> None:
                     )
     ai_app = nimmadev()
     image_path = str(Path().cwd() / image)
+    path_ = str(Path().cwd() / "upscaled.jpg")
     response = await ai_app.imageres(image_path)
     if isinstance(response, bytes):
+      with open("upscaled.jpg", "wb") as p:
+        p.write(response)
       await message.client.send_document(
                                           chat_id=message.chat.id,
-                                          document=response
+                                          document=path_
                                         )
       
     elif isinstance(response, str):
