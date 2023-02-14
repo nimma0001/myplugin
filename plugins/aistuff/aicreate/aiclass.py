@@ -27,7 +27,7 @@ class nimmadev:
         try:
             response = requests.request("POST", url, headers=headers, data=payload)
         except BaseException as e:
-            return e
+            return str(e)
         return response.json().get("images", False)
     
     async def text2para(self, text):
@@ -48,7 +48,7 @@ class nimmadev:
         try:
             response = requests.request("POST", url, headers=headers, data=payload)
         except BaseException as e:
-            return e
+            return str(e)
             
         return response.json()["texts"]
 
@@ -81,7 +81,7 @@ class nimmadev:
             response =  requests.request("POST", url, headers=headers, data=payload)
             result = response.json().get("upscaled", None).encode()
         except BaseException as e:
-            return e
+            return str(e)
             
         return base64.decodebytes(result)
     
