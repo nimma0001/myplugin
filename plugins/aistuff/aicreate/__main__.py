@@ -74,7 +74,7 @@ async def t2p(message: Message) -> None:
                     disable_web_page_preview=True
                     )
     ai_app = nimmadev()
-    image_path = str(Path().cwd() / image)
+    image_path = image
     response = await ai_app.imageres(image_path)
     if isinstance(response, str):
       if "/" in response:
