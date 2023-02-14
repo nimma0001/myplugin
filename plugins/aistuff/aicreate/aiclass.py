@@ -32,7 +32,7 @@ class nimmadev:
         '''genrate text content based on text'''
         url = "https://backend.zyro.com/v1/ai/generate_texts"
         if len(text) < 4:
-            return "Your is small"
+            return False
         payload = json.dumps({
           "prompt": f"{text}",
           "length": 130,
@@ -54,7 +54,7 @@ class nimmadev:
         try:
             file = open(path, 'rb')
         except FileNotFoundError:
-            return "File Not Found"
+            return False
         file_read = file.read()
         file_encode = base64.encodebytes(file_read).decode()
         headers = {
