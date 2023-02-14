@@ -65,7 +65,7 @@ async def t2p(message: Message) -> None:
     'header': "upscale the image takes 40-120 sec",
     'usage': "upscaled image_path"})
 async def t2p(message: Message) -> None:
-    image = message.input_str
+    image = message.filtered_input_str
     await message.edit(
                     "wait 1-2 min upscaling the image",
                     disable_web_page_preview=True
