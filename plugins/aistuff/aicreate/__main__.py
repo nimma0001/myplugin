@@ -1,4 +1,4 @@
-from aiclass import nimmadev
+from .aiclass import nimmadev
 from userge import userge, Message, config
 from pyrogram import enums
 
