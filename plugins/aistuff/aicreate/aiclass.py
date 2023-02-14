@@ -57,11 +57,10 @@ class nimmadev:
         '''imporve image res'''
         url = "https://upscaler.zyro.com/v1/ai/image-upscaler"
         try:
-            file = open(path, 'rb')
+            file = Path(path).read_bytes()
         except FileNotFoundError:
             return False
-        file_read = file.read()
-        file_encode = base64.encodebytes(file_read).decode()
+        file_encode = base64.encodebytes(file).decode()
         headers = {
                   'authority': 'upscaler.zyro.com',
                   'accept': '*/*',
