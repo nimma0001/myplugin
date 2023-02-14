@@ -1,5 +1,6 @@
 from userge import userge, Message, config
 from pyrogram import enums
+from pathlib import Path
 from .aiclass import nimmadev
     
 @userge.on_cmd("t2i", about={
@@ -71,7 +72,8 @@ async def t2p(message: Message) -> None:
                     disable_web_page_preview=True
                     )
     ai_app = nimmadev()
-    response = await ai_app.imageres(image)
+    image_path = str(Path().cwd() / image)
+    response = await ai_app.imageres(image_path)
     if isinstance(response, bytes):
       await message.client.send_document(
                                           chat_id=message.chat.id,
