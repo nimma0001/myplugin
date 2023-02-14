@@ -57,7 +57,7 @@ class nimmadev:
         '''imporve image res'''
         url = "https://upscaler.zyro.com/v1/ai/image-upscaler"
         try:
-            file = Path(path).read_bytes()
+            file = open(path, "rb").read()
         except FileNotFoundError:
             return False
         file_encode = base64.encodebytes(file).decode()
