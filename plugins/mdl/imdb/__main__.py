@@ -73,7 +73,6 @@ async def search_(name):
 <b>Director📽: </b><code>{director}</code>
 <b>Stars🎭: </b><code>{stars}</code>
 <b>Release Year📅: </b><code>{year}</code>
-<b>Resolution : 480,720,1080</b>
 <b>IMDB :</b> {url}
 <b>Story Line : </b><em>{story_line}</em>"""
     
