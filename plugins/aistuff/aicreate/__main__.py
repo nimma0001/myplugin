@@ -80,6 +80,7 @@ async def t2p(message: Message) -> None:
       if "/" in response:
           decoded_data = base64.b64decode(response)
           file__object = io.BytesIO(decoded_data)
+          file__object.name = "up_photo.jpg"
           await message.client.send_document(
                                               chat_id=message.chat.id,
                                               document=file__object
