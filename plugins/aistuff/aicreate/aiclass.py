@@ -57,12 +57,11 @@ class nimmadev:
         '''imporve image res'''
         url = "https://upscaler.zyro.com/v1/ai/image-upscaler"
         try:
-            File = open(path, "rb")
-
+            with open(path, "rb") as file:
+                encoded_data = base64.b64encode(file.read())
+                encoded_string = encoded_data.decode("utf-8")
         except FileNotFoundError:
             return False
-        File_read = File.read()
-        file_encode = base64.encodebytes(File_read).decode()
         headers = {
                   'accept': '*/*',
                   'accept-language': 'en-GB,en;q=0.9,en-US;q=0.8',
@@ -71,11 +70,11 @@ class nimmadev:
                   'Content-Type': 'application/json'
                 }
         payload = json.dumps({
-                              "image_data": f"data:image/jpeg;base64,{file_encode}"})
+                              "image_data": f"data:image/jpeg;base64,{encoded_string}"})
         try:
             response =  requests.request("POST", url, headers=headers, data=payload)
-            result = response.json().get("upscaled", None).split(",")[1].encode()
+            result = response.json().get("upscaled", None).split(",")[1]
         except BaseException as e:
             return str(e)
         
-        return base64.decodebytes(result)
+        return result
