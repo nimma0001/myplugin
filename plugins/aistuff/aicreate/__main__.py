@@ -2,6 +2,8 @@ from userge import userge, Message, config
 from pyrogram import enums
 from pathlib import Path
 from .aiclass import nimmadev
+import base64
+import io
     
 @userge.on_cmd("t2i", about={
     'header': "make image from text takes 1-2 min",
