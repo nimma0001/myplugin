@@ -56,32 +56,26 @@ class nimmadev:
     async def imageres(self, path):
         '''imporve image res'''
         url = "https://upscaler.zyro.com/v1/ai/image-upscaler"
-        try:
-            file = open(path, "rb").read()
+       try:
+            File = open(path, "rb")
+
         except FileNotFoundError:
             return False
-        file_encode = base64.encodebytes(file).decode()
+        File_read = File.read()
+        file_encode = base64.encodebytes(File_read).decode()
         headers = {
-                  'authority': 'upscaler.zyro.com',
                   'accept': '*/*',
                   'accept-language': 'en-GB,en;q=0.9,en-US;q=0.8',
                   'access-control-request-headers': 'content-type',
                   'access-control-request-method': 'POST',
-                  'origin': 'https://zyro.com',
-                  'referer': 'https://zyro.com/',
-                  'sec-fetch-dest': 'empty',
-                  'sec-fetch-mode': 'cors',
-                  'sec-fetch-site': 'same-site',
-                  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1660.12',
                   'Content-Type': 'application/json'
                 }
         payload = json.dumps({
                               "image_data": f"data:image/jpeg;base64,{file_encode}"})
         try:
             response =  requests.request("POST", url, headers=headers, data=payload)
-            result = response.json().get("upscaled", None).encode()
+            result = response.json().get("upscaled", None).split(",")[1].encode()
         except BaseException as e:
             return str(e)
-            
+        
         return base64.decodebytes(result)
-    
