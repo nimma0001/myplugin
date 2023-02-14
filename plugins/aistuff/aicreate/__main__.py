@@ -89,11 +89,6 @@ async def t2p(message: Message) -> None:
                         response,
                         disable_web_page_preview=True
                         )
-    elif isinstance(response, str):
-      await message.edit(
-                        response,
-                        disable_web_page_preview=True
-                        )
       
     else:
       await message.edit(
