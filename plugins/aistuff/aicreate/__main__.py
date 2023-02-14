@@ -3,7 +3,7 @@ from pyrogram import enums
 from .aiclass import nimmadev
     
 @userge.on_cmd("t2i", about={
-    'header': "make image from text",
+    'header': "make image from text takes 1-2 min",
     'usage': "t2i gorilla on bike"})
 async def t2i(message: Message) -> None:
     text = message.input_str
@@ -28,7 +28,7 @@ async def t2i(message: Message) -> None:
                         )
       
 @userge.on_cmd("t2p", about={
-    'header': "make paragraph from text",
+    'header': "make paragraph from text twakes 10-40 sec",
     'usage': "t2p gorilla on bike"})
 async def t2p(message: Message) -> None:
     text = message.input_str
@@ -54,7 +54,7 @@ async def t2p(message: Message) -> None:
       
       
 @userge.on_cmd("upscale", about={
-    'header': "upscale the image",
+    'header': "upscale the image takes 40-120 sec",
     'usage': "upscaled image_path"})
 async def t2p(message: Message) -> None:
     image = message.input_str
