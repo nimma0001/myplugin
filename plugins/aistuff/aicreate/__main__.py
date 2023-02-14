@@ -15,7 +15,7 @@ async def t2i(message: Message) -> None:
                                             chat_id=message.chat.id,
                                             document=f"https://img.craiyon.com/{link}"
                                           )
-    elif isinstance(response, bytes):
+    elif isinstance(response, str):
         await message.edit(
                           response,
                           disable_web_page_preview=True
@@ -40,7 +40,7 @@ async def t2p(message: Message) -> None:
                                             chat_id=message.chat.id,
                                             text=f"{text}"
                                           )
-    elif isinstance(response, bytes):
+    elif isinstance(response, str):
         await message.edit(
                           response,
                           disable_web_page_preview=True
@@ -66,7 +66,7 @@ async def t2p(message: Message) -> None:
                                           document=response
                                         )
       
-    elif isinstance(response, bytes):
+    elif isinstance(response, str):
       await message.edit(
                         response,
                         disable_web_page_preview=True
