@@ -56,7 +56,7 @@ class nimmadev:
     async def imageres(self, path):
         '''imporve image res'''
         url = "https://upscaler.zyro.com/v1/ai/image-upscaler"
-       try:
+        try:
             File = open(path, "rb")
 
         except FileNotFoundError:
