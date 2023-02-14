@@ -87,7 +87,7 @@ async def t2p(message: Message) -> None:
                                             )
       else:
         await message.edit(
-                        response,
+                        "Try Again or Another picture",
                         disable_web_page_preview=True
                         )
       
