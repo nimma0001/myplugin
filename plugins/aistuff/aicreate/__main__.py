@@ -7,6 +7,10 @@ from .aiclass import nimmadev
     'usage': "t2i gorilla on bike"})
 async def t2i(message: Message) -> None:
     text = message.input_str
+    await message.edit(
+                        "wait 1-2 min genrating image",
+                        disable_web_page_preview=True
+                        )
     ai_app = nimmadev()
     response = await ai_app.text2img(text)
     if isinstance(response, list):
@@ -32,6 +36,10 @@ async def t2i(message: Message) -> None:
     'usage': "t2p gorilla on bike"})
 async def t2p(message: Message) -> None:
     text = message.input_str
+    await message.edit(
+                        "wait 10-40 sec genrating text",
+                        disable_web_page_preview=True
+                        )
     ai_app = nimmadev()
     response = await ai_app.text2para(text)
     if isinstance(response, list):
@@ -58,6 +66,10 @@ async def t2p(message: Message) -> None:
     'usage': "upscaled image_path"})
 async def t2p(message: Message) -> None:
     image = message.input_str
+    await message.edit(
+                    "wait 1-2 min upscaling the image",
+                    disable_web_page_preview=True
+                    )
     ai_app = nimmadev()
     response = await ai_app.imageres(image)
     if isinstance(response, bytes):
