@@ -73,7 +73,7 @@ class nimmadev:
                               "image_data": f"data:image/jpeg;base64,{encoded_string}"})
         try:
             response =  requests.request("POST", url, headers=headers, data=payload)
-            result = response.json().get("upscaled", None).split(",")[1]
+            result = response.json().get("upscaled", "h,Not Converted").split(",")[1]
         except BaseException as e:
             return str(e)
         
