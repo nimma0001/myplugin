@@ -24,8 +24,10 @@ class nimmadev:
           'origin': 'https://www.craiyon.com',
           'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1660.12'
         }
-
-        response = requests.request("POST", url, headers=headers, data=payload)
+        try:
+            response = requests.request("POST", url, headers=headers, data=payload)
+        except BaseException as e:
+            return e
         return response.json().get("images", False)
     
     async def text2para(self, text):
@@ -43,8 +45,11 @@ class nimmadev:
           'accept': 'application/json, text/plain, */*',
           'content-type': 'application/json'
         }
-
-        response = requests.request("POST", url, headers=headers, data=payload)
+        try:
+            response = requests.request("POST", url, headers=headers, data=payload)
+        except BaseException as e:
+            return e
+            
         return response.json()["texts"]
 
     
@@ -73,7 +78,11 @@ class nimmadev:
                 }
         payload = json.dumps({
                               "image_data": f"data:image/jpeg;base64,{file_encode}"})
-        response =  requests.request("POST", url, headers=headers, data=payload)
-        result = response.json().get("upscaled", None).encode()
+        try:
+            response =  requests.request("POST", url, headers=headers, data=payload)
+            result = response.json().get("upscaled", None).encode()
+        except BaseException as e:
+            return e
+            
         return base64.decodebytes(result)
     
