@@ -73,16 +73,20 @@ async def t2p(message: Message) -> None:
                     )
     ai_app = nimmadev()
     image_path = str(Path().cwd() / image)
-    path_ = str(Path().cwd() / "upscaled.jpg")
     response = await ai_app.imageres(image_path)
-    if isinstance(response, bytes):
-      with open("upscaled.jpg", "wb") as p:
-        p.write(response)
-      await message.client.send_document(
-                                          chat_id=message.chat.id,
-                                          document=path_
-                                        )
-      
+    if isinstance(response, str):
+      if "/" in response:
+          decoded_data = base64.b64decode(response)
+          file__object = io.BytesIO(decoded_data)
+          await message.client.send_document(
+                                              chat_id=message.chat.id,
+                                              document=file__object
+                                            )
+      else:
+        await message.edit(
+                        response,
+                        disable_web_page_preview=True
+                        )
     elif isinstance(response, str):
       await message.edit(
                         response,
