@@ -3,6 +3,7 @@ from pyrogram import enums
 from pathlib import Path
 from .aiclass import nimmadev
 import base64
+from wbb.utils.functions import resize_photo as rz
 import io
     
 @userge.on_cmd("t2i", about={
@@ -97,3 +98,11 @@ async def t2p(message: Message) -> None:
                         disable_web_page_preview=True
                         )
       
+@userge.on_cmd("pr", about={
+    'header': "make image from text takes 1-2 min",
+    'usage': "pr"})
+async def p2(message: Message) -> None:
+    try:
+        await message.reply_photo(rz(await message.download()))
+    except:
+       await message.edit("error")
