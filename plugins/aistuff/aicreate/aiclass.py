@@ -62,6 +62,7 @@ class nimmadev:
                 pixel_drain = subprocess.check_output(['curl', '-g', 'https://pixeldrain.com/api/file/', '--upload-file', path])
                 pixel_link = json.loads(pixel_drain.decode().replace('\n', ''))['id'] 
                 pixel_link = f"https://pixeldrain.com/u/{pixel_link}?download"
+                return pixel_link
             else:
                 pixel_link = path
         except FileNotFoundError:

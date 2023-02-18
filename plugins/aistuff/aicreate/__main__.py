@@ -84,7 +84,7 @@ async def t2p(message: Message) -> None:
       
     else:
       await message.edit(
-                        "Failed",
+                        response,
                         disable_web_page_preview=True
                         )
       
