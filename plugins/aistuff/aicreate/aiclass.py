@@ -2,6 +2,7 @@ import asyncio
 import requests
 import json
 import base64
+import subprocess
 
 class nimmadev:
     
@@ -53,27 +54,41 @@ class nimmadev:
         return response.json()["texts"]
 
     
-    async def imageres(self, path):
+    async def imageres(self, path, factor="4"):
         '''imporve image res'''
-        url = "https://upscaler.zyro.com/v1/ai/image-upscaler"
+        url = "https://replicate.com/api/models/nightmareai/real-esrgan/versions/42fed1c4974146d4d2414e2be2c5277c7fcf05fcc3a73abf41610695738c1d7b/predictions"
         try:
-            with open(path, "rb") as file:
-                encoded_data = base64.b64encode(file.read())
-                encoded_string = encoded_data.decode("utf-8")
+            if "http" not in path:
+                pixel_drain = subprocess.check_output(['curl', '-g', 'https://pixeldrain.com/api/file/', '--upload-file', path])
+                pixel_link = json.loads(pixel_drain.decode().replace('\n', ''))['id'] + "?download"
+            else:
+                pixel_link = path
         except FileNotFoundError:
             return False
-        headers = {
-                  'accept': '*/*',
-                  'accept-language': 'en-GB,en;q=0.9,en-US;q=0.8',
-                  'access-control-request-headers': 'content-type',
-                  'access-control-request-method': 'POST',
-                  'Content-Type': 'application/json'
-                }
         payload = json.dumps({
-                              "image_data": f"data:image/jpeg;base64,{encoded_string}"})
+          "inputs": {
+            "scale": factor,
+            "face_enhance": False,
+            "image": pixel_link
+          }
+        })
+        headers = {
+          'authority': 'replicate.com',
+          'accept': 'application/json',
+          'content-type': 'application/json',
+          'origin': 'https://replicate.com',
+          'Cookie': 'replicate_anonymous_id=0c1be776-b35a-4446-80db-32397c87fecc'
+        }
         try:
-            response =  requests.request("POST", url, headers=headers, data=payload)
-            result = response.json().get("upscaled", "h,Not Converted").split(",")[1]
+            response = requests.request("POST", url, headers=headers, data=payload)
+            result = response.json().get("uuid", False)
+            if result:
+                proc = "non"
+                while proc != "succeeded":
+                    r = request.get(f"https://replicate.com/api/models/nightmareai/real-esrgan/versions/42fed1c4974146d4d2414e2be2c5277c7fcf05fcc3a73abf41610695738c1d7b/predictions/{result}"
+                    proc = r.json["prediction"]["status"]
+                else:
+                    result = r.json["prediction"]["output"]
         except BaseException as e:
             return str(e)
         

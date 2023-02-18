@@ -76,24 +76,15 @@ async def t2p(message: Message) -> None:
     ai_app = nimmadev()
     image_path = image
     response = await ai_app.imageres(image_path)
-    if isinstance(response, str):
-      if "/" in response:
-          decoded_data = base64.b64decode(response)
-          file__object = io.BytesIO(decoded_data)
-          file__object.name = "up_photo.jpg"
-          await message.client.send_document(
-                                              chat_id=message.chat.id,
-                                              document=file__object
-                                            )
-      else:
-        await message.edit(
-                        "Try Again or Another picture",
-                        disable_web_page_preview=True
-                        )
+    if response:
+        await message.client.send_document(
+                                            chat_id=message.chat.id,
+                                            document=f"{response}"
+                                          )
       
     else:
       await message.edit(
-                        "File Not Found",
+                        "Failed",
                         disable_web_page_preview=True
                         )
       
