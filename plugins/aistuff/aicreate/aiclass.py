@@ -85,7 +85,7 @@ class nimmadev:
             if result:
                 proc = "non"
                 while proc != "succeeded":
-                    r = request.get(f"https://replicate.com/api/models/nightmareai/real-esrgan/versions/42fed1c4974146d4d2414e2be2c5277c7fcf05fcc3a73abf41610695738c1d7b/predictions/{result}")
+                    r = requests.get(f"https://replicate.com/api/models/nightmareai/real-esrgan/versions/42fed1c4974146d4d2414e2be2c5277c7fcf05fcc3a73abf41610695738c1d7b/predictions/{result}")
                     proc = r.json()["prediction"]["status"]
                 else:
                     result = r.json()["prediction"]["output"]
