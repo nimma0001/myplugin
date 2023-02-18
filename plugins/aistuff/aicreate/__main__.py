@@ -70,7 +70,7 @@ async def t2p(message: Message) -> None:
 async def t2p(message: Message) -> None:
     image = message.input_str
     await message.edit(
-                    "wait 1-2 min upscaling the image",
+                    "wait 15-40 sec upscaling the image",
                     disable_web_page_preview=True
                     )
     ai_app = nimmadev()
@@ -84,7 +84,7 @@ async def t2p(message: Message) -> None:
       
     else:
       await message.edit(
-                        response,
+                        "Faled",
                         disable_web_page_preview=True
                         )
       
