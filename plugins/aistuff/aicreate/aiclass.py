@@ -61,6 +61,7 @@ class nimmadev:
             if "http" not in path:
                 pixel_drain = subprocess.check_output(['curl', '-g', 'https://pixeldrain.com/api/file/', '--upload-file', path])
                 pixel_link = json.loads(pixel_drain.decode().replace('\n', ''))['id'] + "?download"
+                print(pixel_link)
             else:
                 pixel_link = path
         except FileNotFoundError:
