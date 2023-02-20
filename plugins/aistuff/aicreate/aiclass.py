@@ -6,7 +6,7 @@ import subprocess
 
 class nimmadev:
     
-    def __init__(self):
+    async def __init__(self):
         pass
         
     async def text2img(self, text):
