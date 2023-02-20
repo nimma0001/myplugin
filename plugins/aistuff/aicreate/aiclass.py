@@ -5,9 +5,6 @@ import base64
 import subprocess
 
 class nimmadev:
-    
-    async def __init__(self):
-        pass
         
     async def text2img(self, text):
         '''convert text to img takes text as string'''
