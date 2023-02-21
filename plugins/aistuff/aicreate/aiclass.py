@@ -53,6 +53,8 @@ class nimmadev:
     
     async def imageres(self, path, factor="4"):
         '''imporve image res'''
+        r = requests.get("https://replicate.com/nightmareai/real-esrgan")
+        cookie_token = r.cookies.get_dict()["replicate_anonymous_id"]
         url = "https://replicate.com/api/models/nightmareai/real-esrgan/versions/42fed1c4974146d4d2414e2be2c5277c7fcf05fcc3a73abf41610695738c1d7b/predictions"
         try:
             if "http" not in path:
@@ -75,7 +77,7 @@ class nimmadev:
           'accept': 'application/json',
           'content-type': 'application/json',
           'origin': 'https://replicate.com',
-          'Cookie': 'replicate_anonymous_id=0c1be776-b35a-4446-80db-32397c87fecc'
+          'Cookie': f'replicate_anonymous_id={cookie_token}'
         }
         try:
             response = requests.request("POST", url, headers=headers, data=payload)
