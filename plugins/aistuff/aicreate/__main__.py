@@ -64,27 +64,4 @@ async def t2p(message: Message) -> None:
                         )
       
       
-@userge.on_cmd("upscale", about={
-    'header': "upscale the image takes 40-120 sec",
-    'usage': "upscaled image_path"})
-async def t2p(message: Message) -> None:
-    image = message.input_str
-    await message.edit(
-                    "wait 15-40 sec upscaling the image",
-                    disable_web_page_preview=True
-                    )
-    ai_app = nimmadev()
-    image_path = image
-    response = await ai_app.imageres(image_path)
-    if response:
-        await message.client.send_document(
-                                            chat_id=message.chat.id,
-                                            document=f"{response}"
-                                          )
-      
-    else:
-      await message.edit(
-                        "Faled",
-                        disable_web_page_preview=True
-                        )
-      
+
